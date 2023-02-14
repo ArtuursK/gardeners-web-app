@@ -1,4 +1,4 @@
-package com.gardeners.web.app.garders.app;
+package com.gardeners.web.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

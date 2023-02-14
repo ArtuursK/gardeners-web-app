@@ -1,4 +1,4 @@
-package com.gardeners.web.app.garders.app;
+package com.gardeners.web.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
