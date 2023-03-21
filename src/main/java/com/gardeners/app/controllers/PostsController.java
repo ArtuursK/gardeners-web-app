@@ -1,6 +1,7 @@
 package com.gardeners.app.controllers;
 
 
+import com.gardeners.app.entities.Gardener;
 import com.gardeners.app.entities.Post;
 import com.gardeners.app.services.CommonService;
 import com.gardeners.app.services.FileStorageService;
@@ -77,5 +78,25 @@ public class PostsController {
         return "edit-post-form";
     }
 
+    @PostMapping(value ="/post/save")
+    public String createNewPost(
+            Authentication authentication,
+            Model model,
+            @RequestParam("postDescription") String postDescription,
+            @RequestParam("file") MultipartFile imageFile
+    ) {
+        String loggedInUserName = authentication.getName();
+        //gardener can only create new posts where he is the author
+        Gardener gardener = gardenerService.getGardenerByUsername(loggedInUserName);
+        //save file and get file path
+        String fileName = IMAGES_DIR_PREFIX + loggedInUserName + "/" + fileStorageService.save(imageFile, loggedInUserName);
 
+        //save post
+        if(postsService.createNewPost(gardener.getId(), postDescription, fileName)) {
+            model.addAttribute("message", "Your post was saved");
+        } else {
+            model.addAttribute("message", "Error when saving your post");
+        }
+        return getAllPosts(authentication, model);
+    }
 }

@@ -18,6 +18,35 @@
     <div th:replace="~{fragments/header :: header}"></div>
 
     <div class="postcontainer">
+
+        <!-- Add a new post -->
+        <div class="shadow mb-5 bg-body-tertiary rounded card mb-3 post" th:fragment="newpost">
+            <div class="card card-body">
+                <div class="d-flex mb-3">
+                    <div class="avatar avatar-xs me-2">
+                        <img class="avatar-img" th:src="${userAvatar}" th:alt="${userAvatar}">
+                    </div>
+                    <form id="add-new-post-form" class="w-100" th:action="@{/post/save}" method="post" enctype="multipart/form-data">
+                        <textarea id="post_desc" class="form-control pe-4 border-0" name="postDescription" maxlength="400" rows="2" placeholder="Share your knowledge..." style="height: 61px;"></textarea>
+                        <div class="collapse" id="collapseAddingPhoto" style="margin-top:10px; margin-bottom:10px;">
+                            <div class="mb-3">
+                                <label for="formFileSm" class="form-label">Add a photo for your post:</label>
+                                <input class="form-control form-control-sm" id="formFileSm" type="file" name="file" accept="image/png, image/jpeg">
+                            </div>
+                        </div>
+                        <ul class="nav nav-pills nav-stack small fw-normal">
+                            <li class="nav-item post-option">
+                                <a class="nav-link bg-light py-1 px-2 mb-0" data-bs-toggle="collapse" href="#collapseAddingPhoto" role="button" aria-expanded="false" aria-controls="collapseAddingPhoto"><i class="bi bi-image-fill pe-2" style="color:black;"></i><span style="color:black;">Add Photo</span></a>
+                            </li>
+                            <li class="nav-item post-option">
+                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#" onclick="document.getElementById('add-new-post-form').submit()"><i class="bi bi-plus-circle pe-2" style="color:black;"></i><span style="color:black;">Save</span></a>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div th:if="${posts != null and !posts.isEmpty()}">
             <div th:each="post : ${posts}">
                 <div class="shadow mb-5 bg-body-tertiary rounded card mb-3 post">

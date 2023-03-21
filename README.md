@@ -1,6 +1,16 @@
 # gardeners-web-app
 
 
+### Tools, libraries, frameworks used:
+* spring boot - spring5
+* java 17
+* thymeleaf 3
+* bootstrap 5
+* mysql 8
+* bcrypt 4
+* 
+
+
 ### How to setup and run:
 1) add the following environment variables based on your database configuration:
    ```${GARDENERS_DB_URL}```

@@ -37,4 +37,11 @@ public class PostsService {
                         "gardener.username = ?" +
                         "order by post.post_id desc;", new GardenerPostsMapper(), username);
     }
+
+    public boolean createNewPost(long gardener_id, String description, String postImageFileName) {
+        return jdbcTemplate.update(
+                "insert into post (description, gardener_id, imageurl) " +
+                        "values (?, ?, ?)", description, gardener_id, postImageFileName) > 0;
+
+    }
 }
