@@ -1,0 +1,116 @@
+
+html, body {
+    font-family: 'Rubik', sans-serif;
+}
+
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100%;
+}
+
+.form-control:focus {
+    outline: none !important;
+}
+
+/* NAVIGATION */
+.navbar-toggler {
+    border-color: #fff !important;
+    border: none !important;
+}
+
+.navbar {
+    color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background: rgb(33,37,41);
+    background: linear-gradient(90deg, rgba(33,37,41,1) 0%, rgba(33,37,41,1) 100%, rgba(0,212,255,1) 100%);
+}
+
+span.active {
+    color: #4bb800;
+}
+
+span.inactive {
+    color: #fff;
+}
+
+span.inactive:hover {
+    color: #4bb800;
+}
+
+.avatar-img-navbar {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+/* END NAVIGATION */
+
+a {
+
+}
+
+a:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #4bb800;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:active {
+    color: #4bb800;
+    background-color: transparent;
+}
+
+a:hover {
+    color: #4bb800;
+}
+
+
+.author-name {
+    color: #000 !important;
+}
+
+
+.post-option:hover {
+    background: #4bb800;
+}
+
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    /* fixed backgrounds does not work well on mobile devices */
+    body {
+        background-repeat: repeat;
+        background-attachment: scroll;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}
+

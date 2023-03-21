@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light py-1 fixed-top shadow-sm" th:fragment="header">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/allposts}"><b>gardeners-web-app</b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list" style="color:#fff; font-size:30px;"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/allposts}"><span th:classappend="${caller == 'allposts' ? 'active' : 'inactive'}">allposts</span></a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" data-bs-toggle="dropdown"><img class="avatar-img-navbar" th:src="${userAvatar}" th:alt="${userAvatar}"/></a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <span class="dropdown-item">logged in as: <a th:href="@{/gardener/profile(username=${username})}"><span th:text="${username}" style="color:black;"></span></a></span>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript: document.logoutForm.submit()"><span class="inactive" style="color:black;">logout</span></a>
+                            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                                <input hidden type="submit" value="logout" />
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
+
+

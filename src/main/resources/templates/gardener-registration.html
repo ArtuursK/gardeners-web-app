@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gardeners web app register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>gardeners web app registration</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin="anonymous">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Rubik&display=swap}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 0.5rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <div class="mb-md-5 mt-md-4 pb-5">
+                            <form th:action="@{/gardener/create}" method="post">
+                                <div th:if="${message != null}" th:class="${!#strings.contains(message,'ERROR') ? 'alert alert-success alert-dismissible fade show' : 'alert alert-danger alert-dismissible fade show'}" role="alert">
+                                    [[${message}]]
+                                    <div th:if="${!#strings.contains(message,'ERROR')}">
+                                        <a th:href="@{/login}" class="text-white-50 fw-bold">Go to Login</a>
+                                    </div>
+                                </div>
+                                <h2 class="fw-bold mb-2 text-uppercase">Registration</h2>
+                                <p class="text-white-50 mb-5">Please enter your username, email and password</p>
+                                <div class="form-outline form-white mb-4">
+                                    <input type="text" name="username" id="typeUName" class="form-control form-control-lg" placeholder="username" style="color:white; background:black;" required/>
+                                </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="email" style="color:white; background:black;" required/>
+                                </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="password" style="color:white; background:black;" oninput="check()" required/>
+                                </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <input type="password" name="repeatPassword" id="password_confirm" class="form-control form-control-lg" placeholder="repeat password" style="color:white; background:black;" oninput="check()" required/>
+                                </div>
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        function check() {
+            var input = document.getElementById('password_confirm');
+            if (input.value != document.getElementById('password').value) {
+                input.setCustomValidity('Password Must be Matching.');
+            } else {
+                // input is valid -- reset the error message
+                input.setCustomValidity('');
+            }
+        }
+    </script>
+</body>
+</html>
