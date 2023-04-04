@@ -10,11 +10,9 @@ import com.gardeners.app.services.PostsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,18 +83,27 @@ public class PostsController {
             @RequestParam("postDescription") String postDescription,
             @RequestParam("file") MultipartFile imageFile
     ) {
+        String message = "";
+        String fileName = null;
         String loggedInUserName = authentication.getName();
-        //gardener can only create new posts where he is the author
-        Gardener gardener = gardenerService.getGardenerByUsername(loggedInUserName);
-        //save file and get file path
-        String fileName = IMAGES_DIR_PREFIX + loggedInUserName + "/" + fileStorageService.save(imageFile, loggedInUserName);
+
+        if(postDescription.isEmpty()) {
+            message = "Error: Post description cannot be empty";
+        }
+
+        if(imageFile != null && imageFile.getName() != null && message.isEmpty()) {
+            //save file and get file path
+            fileName = IMAGES_DIR_PREFIX + loggedInUserName + "/" + fileStorageService.save(imageFile, loggedInUserName);
+        }
 
         //save post
-        if(postsService.createNewPost(gardener.getId(), postDescription, fileName)) {
-            model.addAttribute("message", "Your post was saved");
-        } else {
-            model.addAttribute("message", "Error when saving your post");
+        if(message.isEmpty()) {
+            //gardener can only create new posts where he is the author
+            Gardener gardener = gardenerService.getGardenerByUsername(loggedInUserName);
+            message = postsService.createNewPost(gardener.getId(), postDescription, fileName) ? "Your post was saved" : "Error: post not saved in DB";
         }
+
+        model.addAttribute("message", message);
         return getAllPosts(authentication, model);
     }
 }
